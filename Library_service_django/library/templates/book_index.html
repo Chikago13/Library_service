@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+    <h2>Взятые книги</h2>
+    {% for object in book_list %}
+    <li>{{ object }} - {{object.author}} - {{object.book_code}} - {{ request.user.username }}</li>
+    {% endfor %}
+    </ul>
+    <form action="{% url 'book_index' %}" method="post">
+        {% csrf_token %}
+        <h2>Действия с книгами</h2>
+        <input type="text" name="book_code" placeholder="Код книги" required>
+        <select name="action" required>
+        <option value="">Выберите действие</option>
+        <option value="return">Сдать книгу</option>
+        </select>
+        <button type="submit">Выполнить</button>
+    </form>
+</body>
+</html>
+
+
+

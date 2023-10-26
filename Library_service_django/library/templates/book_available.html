@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Доступные книги:</h2>
+    <ul>
+        {% for book in books %}
+        <li>{{ book.title }} - {{ book.author }} - {{book.book_code}}</li>
+        {% empty %}
+        <li>Нет доступных книг.</li>
+        {% endfor %}
+        <h2>Пользователь::</h2>
+        <li>{{ request.user.username }}</li>
+    </ul>
+    <form action="{% url 'book_available' %}" method="post">
+        {% csrf_token %}
+        <h2>Действия с книгами</h2>
+        <input type="text" name="book_code" placeholder="Код книги" required>
+        <select name="action" required>
+        <option value="">Выберите действие</option>
+        <option value="borrow">Взять книгу</option>
+        <!-- <option value="return">Сдать книгу</option> -->
+        </select>
+        <button type="submit">Выполнить</button>
+    </form>
+</body>
+</html>
+
